@@ -1,0 +1,9 @@
+{% if alphabetic_secret_list %}
+    <ul>
+    {% for secret in alphabetic_secret_list %}
+        <li><a href="/secflaws/{{ secret.id }}/">{{ secret.secret }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No secrets are available.</p>
+{% endif %}
