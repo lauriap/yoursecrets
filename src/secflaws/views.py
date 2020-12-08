@@ -16,4 +16,4 @@ def results(request, secret_id):
     response = "You're looking at the results of secret %s."
     return HttpResponse(response % secret_id)
 
-    # jatka Raising a 404 error: https://docs.djangoproject.com/en/3.1/intro/tutorial03/
+    # jatka https://docs.djangoproject.com/en/3.1/intro/tutorial04/

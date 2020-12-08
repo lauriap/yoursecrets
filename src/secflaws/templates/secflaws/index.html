@@ -1,9 +1,24 @@
-{% if alphabetic_secret_list %}
-    <ul>
-    {% for secret in alphabetic_secret_list %}
-        <li><a href="/secflaws/{{ secret.id }}/">{{ secret.secret }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No secrets are available.</p>
-{% endif %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Database of Secrets</title>
+    </head>
+
+
+    <body>
+		<h1>Database of Secrets</h1>
+
+        {% if alphabetic_secret_list %}
+        <ul>
+            {% for secret in alphabetic_secret_list %}
+                <li><a href="{% url 'secret' secret.id %}">{{ secret.secret }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>No secrets are available.</p>
+        {% endif %}
+
+    </body>
+</html>
+
+
