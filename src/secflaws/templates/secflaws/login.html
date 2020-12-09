@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Database of Secrets</title>
+    </head>
+
+    <body>
+		<h1>Database of Secrets</h1>
+
+    <p>Welcome to the databse of secrets! We will keep your secrets for you - in case you forget.</p>
+    </body>
+</html>
+
+
+<h2>Login</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Login</button>
+</form>

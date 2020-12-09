@@ -8,6 +8,12 @@
     <body>
 		<h1>Database of Secrets</h1>
 
+        <form action='/logout/' method="POST">
+			{% csrf_token %}
+            <input type="submit" value="Logout"/>
+        </form>
+		
+
         {% if alphabetic_secret_list %}
         <ul>
             {% for secret in alphabetic_secret_list %}
