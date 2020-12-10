@@ -12,12 +12,14 @@
 			{% csrf_token %}
             <input type="submit" value="Logout"/>
         </form>
-		
+        
+        
+        <h2>List of your secrets</h2>
 
-        {% if alphabetic_secret_list %}
+        {% if secret_list %}
         <ul>
-            {% for secret in alphabetic_secret_list %}
-                <li><a href="{% url 'secret' secret.id %}">{{ secret.secret }}</a></li>
+            {% for secret in secret_list %}
+                <li>{{ secret.secret }}</li>
             {% endfor %}
         </ul>
         {% else %}

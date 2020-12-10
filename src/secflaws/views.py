@@ -5,21 +5,19 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.db.models import Q
 
+
 @login_required
 def index(request):
-    alphabetic_secret_list = Secret.objects.order_by('secret')
+    secret_list = Secret.objects.filter(owner=request.user)
     context = {
-        'alphabetic_secret_list': alphabetic_secret_list,
+        'secret_list': secret_list,
     }
     return render(request, 'secflaws/index.html', context)
 
+# Accessible to anyone! No checks on who gets to access the data!
 @login_required
-def secret(request, secret_id):
-    return HttpResponse("Someone has the following secret: %s" % secret_id)
+def details(request, secret_id):
+    secret = Secret.objects.get(pk=secret_id)
+    response = "Owner: %s, secret: %s"
+    return HttpResponse(response % (secret.owner.username, secret.secret))
 
-@login_required
-def results(request, secret_id):
-    response = "You're looking at the results of secret %s."
-    return HttpResponse(response % secret_id)
-
-    # jatka https://docs.djangoproject.com/en/3.1/intro/tutorial04/
