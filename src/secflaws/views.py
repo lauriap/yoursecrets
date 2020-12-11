@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.db.models import Q
+import sqlite3
+from django.db import connection
 
 
 @login_required
@@ -21,3 +23,16 @@ def details(request, secret_id):
     response = "Owner: %s, secret: %s"
     return HttpResponse(response % (secret.owner.username, secret.secret))
 
+@login_required
+def addSecret(request):
+    owner_id = request.user.id
+    secret = request.POST.get("secret")
+    conn = sqlite3.connect('db.sqlite3')
+    cursor = conn.cursor()
+
+    # Unsafe query: risk of SQL injection
+    query =  "INSERT INTO secflaws_secret (secret, owner_id) VALUES ('%s',%d) " % (secret, owner_id)
+    
+    cursor.execute(query)
+    conn.commit()
+    return redirect('/secflaws/')
