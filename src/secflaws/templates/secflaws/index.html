@@ -16,7 +16,7 @@
         <h2>Add a new secret</h2>
 
         <form action='/secflaws/add/' method="POST">
-            {% csrf_token %}
+            <!-- {% csrf_token %} No CSRF protection! -->
 
 			<input type="text" name="secret"/><br/>
             <input type="submit" value="Send"/>
