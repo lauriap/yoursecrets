@@ -33,7 +33,7 @@ rocky - ipunchhard
 
 
 1. Security misconfiguration (OWASP #6)
-    * Due to an error in the .gitignore configuration, the configuration file has been leaked through GitHub. The file contains, among other thing, the private key for the program. This problem could easily be avoided by more careful .gitignore configuring. Also, GitHub warned about the leak via e-mail, but it has not been taken into account.
+    * Due to an error in the initial .gitignore configuration, yoursecrets/settings.py has been leaked to GitHub. The file contains, among other thing, the secret key for the program. Additionally, the file contains a list of installed apps which could help an attacker to search for known vulnerabilities in these apps as well as the name of the database that is being used. This major problem could easily be avoided by more careful .gitignore configuring. Also, GitHub warned about the leak via e-mail, but it has not been taken into account. Once the problem is discovered, all leaked passwords and other information should be replaced.
 
 2. Injection (OWASP #1)
     * In views.py, the 'addSecret' function has been implemented using SQL queries that utilize user input. This implementation makes it vulnerable to SQL injections. This is a situation in which a user is able to input additional commands into the SQL query to, for example, obtain, manipulate or delete data in or from the database. Instead of an approach that utilizes user input in the queries, a safer version could be used that handles input data in a safe manner. The easiest option would be to use Django's ready-made query tools for this purpose, i.e. create a model object (in this case a Secret object) and storing it directly into the database. 
