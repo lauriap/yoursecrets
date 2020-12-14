@@ -2,28 +2,38 @@
 
 This project is a course work that is meant to display various cyber security flaws as described in OWASP. The application contains vulnerabilities and they are explored in more detail in a separate essay.
 
-**Information for testing**
+**Installation instruction and information for testing**
 
-Logins:
+Link to repository: https://github.com/lauriap/yoursecrets
 
-admin
-admin@example.com
-password
+Installation instructions:
+* In the terminal / bash, navigate to a folder you want to place the project into and type
+```
+git clone https://github.com/lauriap/yoursecrets
+```
+* Then, navigate to the src folder than contains manage.py and type
+```
+python3 manage.py runserver
+```
+* This sets up a local server at port 8000. Please note that the application can be found under localhost:8000/secflaws. You can test the application with the following logins:
 
-arnold
-arnoldisking
+admin - admin@example.com - password
 
-rocky
-ipunchhard
+arnold - arnoldisking
+
+rocky - ipunchhard
+
 
 **Known issues**
 
 * Adding secrets does not work with input containing the character '. This problem could be solved through the use of Django's query tools instead of raw SQL queries. This is not done to demonstrate the original approach's vulnerability to SQL injections.
 
+
 # List of security issues
 
+
 1. Security misconfiguration (OWASP #6)
-    * JATKA TÄSTÄ!
+    * Due to an error in the .gitignore configuration, the configuration file has been leaked through GitHub. The file contains, among other thing, the private key for the program. This problem could easily be avoided by more careful .gitignore configuring. Also, GitHub warned about the leak via e-mail, but it has not been taken into account.
 
 2. Injection (OWASP #1)
     * In views.py, the 'addSecret' function has been implemented using SQL queries that utilize user input. This implementation makes it vulnerable to SQL injections. This is a situation in which a user is able to input additional commands into the SQL query to, for example, obtain, manipulate or delete data in or from the database. Instead of an approach that utilizes user input in the queries, a safer version could be used that handles input data in a safe manner. The easiest option would be to use Django's ready-made query tools for this purpose, i.e. create a model object (in this case a Secret object) and storing it directly into the database. 
